@@ -12,7 +12,14 @@ FetchContent_Declare(ENET
     GIT_SHALLOW ON
     EXCLUDE_FROM_ALL
     SYSTEM)
-FetchContent_MakeAvailable(ENET)
+
+FetchContent_Declare(IMGUI
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG 9a5d5c45f54b1301ea471622eddede70384243af
+    GIT_SHALLOW ON
+    EXCLUDE_FROM_ALL
+    SYSTEM)
+FetchContent_MakeAvailable(ENET IMGUI)
 
 file(GLOB_RECURSE SHARED_SOURCES CONFIGURE_DEPENDS src/shared/*.cpp)
 add_library(shared ${SHARED_SOURCES})
@@ -21,7 +28,8 @@ target_include_directories(shared
         PUBLIC
             ${PROJECT_SOURCE_DIR}/include
             ${PROJECT_SOURCE_DIR}/src/shared/include
-            ${enet_SOURCE_DIR}/include)
+            ${enet_SOURCE_DIR}/include
+            ${imgui_SOURCE_DIR}/*)
 target_link_libraries(shared PUBLIC enet)
 
 #server
