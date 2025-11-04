@@ -5,8 +5,7 @@
       "name": "chat-app",
       "includePath": [
         "${workspaceFolder}/include",
-        "${workspaceFolder}/build/_deps/enet-src/include",
-        "${workspaceFolder}/build/_deps/imgui-src/*",
+        "${workspaceFolder}/dependencies/include",
         "${workspaceFolder}/src/shared/include"
       ],
       "cppStandard": "c++20",
