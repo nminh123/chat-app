@@ -1,6 +1,4 @@
 #pragma once
 
-namespace consts
-{
-    float PI = 3.14159;
-}
+#define SCREEN_WIDTH 1080
+#define SCREEN_HEIGHT 2340

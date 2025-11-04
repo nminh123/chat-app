@@ -3,80 +3,51 @@
 #include <glad/glad.h>
 #include "../../shared/include/constants.hpp"
 
-void framebuffer_size_callback(GLFWwindow *window, int width, int height)
+void ProcessExitInput(GLFWwindow* window, bool should_close)
 {
-    // adjust viewport khi cửa sổ thay đổi kích thước
-    glViewport(0, 0, width, height);
-}
-
-void processInput(GLFWwindow *window)
-{
-    // đóng cửa sổ khi nhấn ESC
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+    {
+        std::cout << "Window closing" << std::endl;
+        glfwSetWindowShouldClose(window, should_close);
+    }
 }
 
 int main(int argc, char **argv)
 {
-    // 1) Khởi tạo GLFW
     if (!glfwInit())
     {
-        std::cerr << "Failed to initialize GLFW\n";
-        return -1;
+        std::cerr << "Cannot initialize glfw" << std::endl;
+        return 1;
     }
+    const char *glsl_version = "#version 410 core";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // Required on Mac
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    // Yêu cầu OpenGL 3.3 core (thay đổi nếu cần)
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // macOS
-#endif
-
-    // 2) Tạo cửa sổ
-    const int SCR_WIDTH = 800;
-    const int SCR_HEIGHT = 600;
-    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "GLFW + GLAD Window", nullptr, nullptr);
-    if (!window)
-    {
-        std::cerr << "Failed to create GLFW window\n";
-        glfwTerminate();
-        return -1;
-    }
+    // Create window with graphics context
+    GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Chat App", NULL, NULL);
+    if (window == NULL)
+        return 1;
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1); // Enable vsync
 
-    // 3) Khởi tạo GLAD (load OpenGL function pointers)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        throw("Unable to context to OpenGL");
+
+    int screen_width, screen_height;
+    glfwGetFramebufferSize(window, &screen_width, &screen_height);
+    glViewport(0, 0, screen_width, screen_height);
+
+    while(!glfwWindowShouldClose(window))
     {
-        std::cerr << "Failed to initialize GLAD\n";
-        glfwDestroyWindow(window);
-        glfwTerminate();
-        return -1;
-    }
-
-    // Thiết lập viewport và callback khi resize
-    glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-    // Vòng lặp chính
-    while (!glfwWindowShouldClose(window))
-    {
-        // input
-        processInput(window);
-
-        // render - đây chỉ là clear screen với màu
-        glClearColor(0.12f, 0.18f, 0.24f, 1.0f); // hơi tối
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // -- ở đây bạn vẽ các đối tượng OpenGL --
-
-        // swap buffers và poll events
-        glfwSwapBuffers(window);
         glfwPollEvents();
+		glClearColor(0, 0, 0, 1);
+		glClear(GL_COLOR_BUFFER_BIT);
+        ProcessExitInput(window, true);
     }
 
-    // dọn dẹp
-    glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
 }
