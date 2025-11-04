@@ -53,4 +53,5 @@ target_link_libraries(client
 target_link_libraries(client
     PRIVATE
         ${PROJECT_SOURCE_DIR}/dependencies/library/libglfw.3.4.dylib
+        ${PROJECT_SOURCE_DIR}/dependencies/library/libenet.dylib
 )
