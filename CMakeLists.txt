@@ -10,7 +10,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/dependencies/include
 )
 
-# Nếu bạn có thư viện .dylib trong thư mục /dependencies/library
+# Link thư viện .dylib trong thư mục /dependencies/library
 link_directories(
     ${PROJECT_SOURCE_DIR}/dependencies/library
 )
