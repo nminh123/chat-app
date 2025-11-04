@@ -33,11 +33,21 @@ target_include_directories(shared
 
 #server
 add_executable(server src/server/main.cpp)
-target_link_libraries(server PRIVATE shared)
+# Link thư viện .dylib trong thư mục /dependencies/library
+target_link_libraries(server 
+    PRIVATE 
+        shared
+        ${PROJECT_SOURCE_DIR}/dependencies/library/libenet.dylib
+)
 
 #client
 add_executable(client src/client/main.cpp)
-target_link_libraries(client PRIVATE shared)
+# Link thư viện .dylib trong thư mục /dependencies/library
+target_link_libraries(client 
+    PRIVATE 
+        shared
+        ${PROJECT_SOURCE_DIR}/dependencies/library/libglfw.3.4.dylib        
+)
 
 #link với client -> server không thể đọc được
 target_link_libraries(client
@@ -47,11 +57,4 @@ target_link_libraries(client
         "-framework Cocoa"
         "-framework IOKit"
         "-framework CoreVideo"
-)
-
-# Link thư viện .dylib trong thư mục /dependencies/library
-target_link_libraries(client
-    PRIVATE
-        ${PROJECT_SOURCE_DIR}/dependencies/library/libglfw.3.4.dylib
-        ${PROJECT_SOURCE_DIR}/dependencies/library/libenet.dylib
 )
