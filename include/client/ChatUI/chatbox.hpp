@@ -23,7 +23,7 @@ public:
 
 private:
     ImGuiIO& io;
-    ImFont *large_font;
+    ImFont *large_font, *med_font;
     const char *partner_name;
     char inputTextBuffer[256];
 };
