@@ -1,6 +1,6 @@
 #include <iostream>
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+
+#include "../../include/client/ui.hpp"
 #include "../../shared/include/constants.hpp"
 
 void ProcessExitInput(GLFWwindow* window, bool should_close)
@@ -40,14 +40,20 @@ int main(int argc, char **argv)
     glfwGetFramebufferSize(window, &screen_width, &screen_height);
     glViewport(0, 0, screen_width, screen_height);
 
+    UI ui;
+    ui.Init(window, glsl_version);
     while(!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
+        ui.NewFrame();
+        ui.Update();
+        ui.Render();
+        glfwSwapBuffers(window);
         ProcessExitInput(window, true);
     }
-
+    ui.Shutdown();
     glfwTerminate();
     return 0;
 }
