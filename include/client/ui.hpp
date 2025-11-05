@@ -1,14 +1,11 @@
 #pragma once
-#include <iostream>
-#include <memory>
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-#include <imgui.h>
-#include <imgui_impl_opengl3.h>
-#include <imgui_impl_glfw.h>
 
 #include "ChatUI/chatbox.hpp"
+
+typedef std::unique_ptr<ChatBoxUI> cbu_uptr;
 
 class UI
 {
@@ -19,5 +16,5 @@ public:
     void Render();
     void Shutdown();
 private:
-    std::unique_ptr<ChatBoxUI> cbu;
+    cbu_uptr cbu;
 };

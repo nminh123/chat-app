@@ -4,13 +4,12 @@ const char* partner_name = "Minh";
 
 void UI::Init(GLFWwindow *window, const char *glsl_version)
 {
-    cbu = std::make_unique<ChatBoxUI>(partner_name);
-
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
     // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+    cbu = std::make_unique<ChatBoxUI>(partner_name, io);
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true); // Second param install_callback=true will install GLFW callbacks and chain to existing ones.

@@ -1,4 +1,5 @@
 #pragma once
 
-#define SCREEN_WIDTH 1080
-#define SCREEN_HEIGHT 2340
+#define SCREEN_WIDTH 720
+#define SCREEN_HEIGHT 1080
+#define FONT_PATH "assets/fonts/Roboto-Bold.ttf"

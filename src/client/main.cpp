@@ -1,11 +1,8 @@
-#include <iostream>
-
 #include "../../include/client/ui.hpp"
-#include "../../shared/include/constants.hpp"
 
 void ProcessExitInput(GLFWwindow* window, bool should_close)
 {
-    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+    if(glfwGetKey(window, GLFW_KEY_CAPS_LOCK) == GLFW_PRESS)
     {
         std::cout << "Window closing" << std::endl;
         glfwSetWindowShouldClose(window, should_close);
