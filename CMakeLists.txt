@@ -24,7 +24,7 @@ target_link_libraries(imgui PUBLIC glad)
 set(GLFW_LIB ${PROJECT_SOURCE_DIR}/dependencies/library/libglfw.3.4.dylib)
 
 #==========ENET==========
-set(ENET_LIB ${PROJECT_SOURCE_DIR}/dependencies/library/libenet.dylib)
+set(ENET_LIB ${PROJECT_SOURCE_DIR}/dependencies/library/libenet.7.dylib)
 
 #==========SHARED==========
 file(GLOB_RECURSE SHARED_SOURCES CONFIGURE_DEPENDS src/shared/*.cpp)
