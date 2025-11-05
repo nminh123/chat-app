@@ -1,7 +1,11 @@
 #include "../../include/client/ui.hpp"
 
+const char* partner_name = "Minh";
+
 void UI::Init(GLFWwindow *window, const char *glsl_version)
 {
+    cbu = std::make_unique<ChatBoxUI>(partner_name);
+
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -16,6 +20,7 @@ void UI::Init(GLFWwindow *window, const char *glsl_version)
 #pragma region draw stuff
 void UI::Update()
 {
+    cbu->draw();
 }
 #pragma endregion
 
@@ -24,7 +29,6 @@ void UI::NewFrame()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-    ImGui::ShowDemoWindow(); // Show demo window! :)
 }
 
 void UI::Render()

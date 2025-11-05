@@ -25,6 +25,8 @@ int main(int argc, char **argv)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // Required on Mac
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_POSITION_X, 0);
+    glfwWindowHint(GLFW_POSITION_Y, 0);
 
     // Create window with graphics context
     GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Chat App", NULL, NULL);
@@ -36,16 +38,16 @@ int main(int argc, char **argv)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw("Unable to context to OpenGL");
 
-    int screen_width, screen_height;
-    glfwGetFramebufferSize(window, &screen_width, &screen_height);
-    glViewport(0, 0, screen_width, screen_height);
+    // int screen_width, screen_height;
+    // glfwGetFramebufferSize(window, &screen_width, &screen_height);
+    // glViewport(0, 0, screen_width, screen_height);
 
     UI ui;
     ui.Init(window, glsl_version);
     while(!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-		glClearColor(0, 0, 0, 1);
+		glClearColor(0.1f, 0.105f, 0.11f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
         ui.NewFrame();
         ui.Update();
