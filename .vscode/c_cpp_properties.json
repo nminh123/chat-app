@@ -5,6 +5,7 @@
       "name": "chat-app",
       "includePath": [
         "${workspaceFolder}/include",
+        "${workspaceFolder}/include/client/ChatUI",
         "${workspaceFolder}/dependencies/include",
         "${workspaceFolder}/src/shared/include"
       ],
