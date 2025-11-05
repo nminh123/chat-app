@@ -38,7 +38,8 @@ target_include_directories(shared
 )
 
 #==========SERVER==========
-add_executable(server src/server/main.cpp)
+file(GLOB_RECURSE SERVER_SRC CONFIGURE_DEPENDS src/server/*.cpp)
+add_executable(server ${SERVER_SRC})
 target_link_libraries(server PRIVATE shared ${ENET_LIB})
 target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include/server)
 
